@@ -3,7 +3,6 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
-// servidor basico 'env' es el manejador de la variable de entorno 'PORT'
 const port = process.env.PORT || 8080
 
 const server = http.createServer()
@@ -16,8 +15,10 @@ server.listen(port)
 function onRequest(req,res){
 	let index = path.join(__dirname, 'public', 'index.html')
 	let rs = fs.createReadStream(index)
+    
     res.setHeader('Content-Type', 'text/html')
     rs.pipe(res)
+	
 	rs.on('error',function(err){
 		res.setHeader('Content-Type','text/plain')
 		res.end(err.message)
@@ -25,7 +26,7 @@ function onRequest(req,res){
 }
 
 function onListening(){
-	console.log('Server running in port' + port)
+	console.log(`Server running in port ${port}`)
 }
 
 
