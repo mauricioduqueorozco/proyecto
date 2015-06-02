@@ -1,0 +1,23 @@
+{
+  "name": "biomechanics",
+  "version": "0.0.1",
+  "description": "Esta es una aplicacion para el proyecto de Biomecanica, para el Profesor Alvaro Pages, correspondiente al analisis de un salto a partir de la tecnica de fotometrias, Escuela Politecnica Nacional, UIO. EC.",
+  "main": "serve.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricioduqueorozco/proyecto.git"
+  },
+  "keywords": [
+    "bioingenieria",
+    "fotometria"
+  ],
+  "author": "mauricio.duque.eje@icloud.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mauricioduqueorozco/proyecto/issues"
+  },
+  "homepage": "https://github.com/mauricioduqueorozco/proyecto#readme"
+}
