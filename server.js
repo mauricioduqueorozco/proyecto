@@ -5,14 +5,16 @@ const http = require('http')
 const port = process.env.PORT || 8080
 
 // se crea los metodos de req y res
-const server = http.createServer(function (req,res){
-	res.end('hi')
-})
+const server = http.createServer(onRequest)
 
-// escucha el puerto
-server.listen(port, function(){
+server.listen(port, onListening)
+
+function onRequest(req,res){
+	res.end('hi')
+}
+function onListening(){
 	console.log('Server running in port' + port)
-})
+}
 
 
 
