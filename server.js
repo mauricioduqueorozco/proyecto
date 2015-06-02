@@ -1,6 +1,7 @@
 'use strict'
 
 const http = require('http')
+const fs = require('fs')
 // servidor basico 'env' es el manejador de la variable de entorno 'PORT'
 const port = process.env.PORT || 8080
 
@@ -12,7 +13,8 @@ server.on('listening' , onListening)
 server.listen(port)
 
 function onRequest(req,res){
-	res.end('hi')
+	let file = fs.readFileSync('public/index.html')
+	res.end(file)
 }
 
 function onListening(){

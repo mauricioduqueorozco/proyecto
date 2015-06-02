@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mauricioduqueorozco/proyecto/issues"
   },
-  "homepage": "https://github.com/mauricioduqueorozco/proyecto#readme"
+  "homepage": "https://github.com/mauricioduqueorozco/proyecto#readme",
+  "dependencies": {
+    "fs": "0.0.2"
+  }
 }
