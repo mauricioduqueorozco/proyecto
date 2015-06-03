@@ -1,5 +1,7 @@
-//browserify client/app.js -o public/app.js
+//browserify client/app.js -o public/app.js => npm run build-js
+// si esta en el package.json
 //source ~/.profile
+
 const Webrtc2Images = require('webrtc2images')
 
 const rtc = new Webrtc2Images({

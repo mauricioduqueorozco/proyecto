@@ -4,7 +4,10 @@
   "description": "Esta es una aplicacion para el proyecto de Biomecanica, para el Profesor Alvaro Pages, correspondiente al analisis de un salto a partir de la tecnica de fotometrias, Escuela Politecnica Nacional, UIO. EC.",
   "main": "serve.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall" : "npm run build-js",
+    "build-js" : "browserify client/app.js -o public/app.js",
+    "start" : "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
   },
   "homepage": "https://github.com/mauricioduqueorozco/proyecto#readme",
   "dependencies": {
+    "course": "0.0.1",
     "fs": "0.0.2",
     "st": "^0.5.4",
     "webrtc2images": "^1.4.4"
