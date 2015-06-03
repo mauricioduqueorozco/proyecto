@@ -778,10 +778,10 @@ const Webrtc2Images = require('webrtc2images')
 const rtc = new Webrtc2Images({
   width: 200,
   height: 200,
-  frames: 10,
+  frames: 60,
   type: 'image/jpeg',
   quality: 0.4,
-  interval: 200
+  interval: 10
 })
 
 rtc.startVideo(function (err) {
