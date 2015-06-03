@@ -14,11 +14,15 @@ const mount = st({
 })
 
 router.post('/process', function (req, res) {
-  jsonBody(req, res, { limit: 3 * 1024 * 1024 }, function (err, body) {
+  jsonBody(req, res, { limit: 100 * 1024 * 1024 }, function (err, body) {
     if (err) return fail(err, res)
 
     if (Array.isArray(body.images)) {
       let converter = helper.convertVideo(body.images)
+
+      converter.on('log', function (msg) {
+        console.log(msg)
+      })
 
       converter.on('video', function (video) {
         res.setHeader('Content-Type', 'application/json')
