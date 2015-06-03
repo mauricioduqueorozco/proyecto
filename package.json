@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/mauricioduqueorozco/proyecto#readme",
   "dependencies": {
+    "async": "^1.2.0",
     "body": "^5.0.0",
     "course": "0.0.1",
     "fs": "0.0.2",
