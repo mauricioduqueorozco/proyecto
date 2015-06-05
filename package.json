@@ -29,6 +29,7 @@
     "course": "0.0.1",
     "data-uri-to-buffer": "0.0.3",
     "fs": "0.0.2",
+    "mathjs": "^1.7.0",
     "st": "^0.5.4",
     "uuid": "^2.0.1",
     "webrtc2images": "^1.4.4",

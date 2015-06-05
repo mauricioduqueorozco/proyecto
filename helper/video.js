@@ -1,4 +1,5 @@
 'use strict'
+
 const os = require('os')
 const fs = require('fs')
 const path = require('path')
@@ -6,52 +7,75 @@ const uuid = require('uuid')
 const async = require('async')
 const dataURIBuffer = require('data-uri-to-buffer')
 const EventEmitter = require('events').EventEmitter
+const concat = require('concat-stream')
+const listFiles = require('./list')
+
 
 module.exports = function (images) {
   let events = new EventEmitter()
   let count = 0
+  let count2 = 0
   let baseName = uuid.v4()
-  //let tmpDir = os.tmpDir()
-  let tmpDir = '/Users/mauricio/Desktop/fotos'
+  let tmpDir = os.tmpDir()
+  let video = new Array()
 
   async.series([
-  	decodeImages,
-  	createVideo,
-  	encodeVideo,
-  	cleanup
-  ],convertFinished)
+    decodeImages,
+    cleanup
+  ], convertFinished)
 
   // Decode images to files
-  function decodeImages (done){
-  	async.eachSeries(images, decodeImage, done)
+  function decodeImages (done) {
+    async.eachSeries(images, decodeImage, done)
   }
-   // Decode a single image
+
+  // Decode a single image
   function decodeImage (image, done) {
     let fileName = `${baseName}-${count++}.jpg`
     let buffer = dataURIBuffer(image)
     let ws = fs.createWriteStream(path.join(tmpDir, fileName))
-
+    video[count2++] = image
     ws.on('error', done)
       .end(buffer, done)
 
     events.emit('log', `Converting ${fileName}`)
   }
-  //Create video from images with ffmpeg
-  function createVideo (done) {
-  	done()
-  }
-  // Encode video
-  function encodeVideo (done){
-  	done()
-  }
+
   // Cleanup temp folder
-  function cleanup (done){
-  	done()
+  function cleanup (done) {
+    events.emit('log', 'Cleaning up')
+
+    listFiles(tmpDir, baseName, function (err, files) {
+      if (err) return done(err)
+
+      // delete files
+      deleteFiles(files, done)
+    })
   }
-	function convertFinished (err){
-		 setTimeout(function () {
-	    events.emit('video', 'this will be the encoded video')
-	  }, 500)
-	}
+
+  // Delete all files
+  function deleteFiles (files, done) {
+    async.each(files, deleteFile, done)
+  }
+
+  // Delete one file
+  function deleteFile (file, done) {
+    events.emit('log', `Deleting ${file}`)
+
+    fs.unlink(path.join(tmpDir, file), function (err) {
+      // ignore error
+
+      done()
+    })
+  }
+
+
+  // Convertion finished
+  function convertFinished (err) {
+    if (err) return events.emit('error', err)
+
+    events.emit('video', video)
+  }
+
   return events
 }
